@@ -1,0 +1,17 @@
+Modules To be implemented
+
+speech
+	Speech Recognition
+	Speech Synthesis
+	
+ui
+	interactive ui
+	deliver text and image [ content extracted from web ]
+	show scripts
+
+web
+	web scrapping and understanding man pages
+
+nlp
+	string to action
+	Question and Answer model [ Chat Bot ]
