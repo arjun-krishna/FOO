@@ -22,7 +22,16 @@ from django.shortcuts import render
 def send_index(request):
 	return render(request,'index.html')
 
+def send_js(request) :
+    return render(request,'js/index.js')
+
+def send_angular_js(request) :
+    return render(request,'js/angular.min.js')
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'js/index\.js',send_js),
+    url(r'js/angular\.min\.js',send_angular_js),
     url(r'',send_index), 
 ]
