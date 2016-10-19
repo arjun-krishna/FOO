@@ -18,20 +18,13 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.http import HttpResponse
 from django.shortcuts import render
-
+import nlp.views # for testing viewpoints
 def send_index(request):
 	return render(request,'index.html')
-
-def send_js(request) :
-    return render(request,'js/index.js')
-
-def send_angular_js(request) :
-    return render(request,'js/angular.min.js')
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'js/index\.js',send_js),
-    url(r'js/angular\.min\.js',send_angular_js),
+    url(r'^gen/', nlp.views.TestView.as_view()), # for sample views in rest_framework
     url(r'',send_index), 
 ]
