@@ -25,6 +25,6 @@ def send_index(request):
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^gen/', nlp.views.TestView.as_view()), # for sample views in rest_framework
+    url(r'^test/', nlp.views.TestView.as_view()), # for sample views in rest_framework
     url(r'',send_index), 
 ]
