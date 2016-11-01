@@ -19,7 +19,7 @@ class MyWindowWebKit:
         self.window.set_resizable(True)
         self.window.connect("delete_event", self.delete_event)
         self.window.connect("destroy", self.destroy)
-        self.window.set_default_size(400, 600) 
+        self.window.set_default_size(460, 670) 
         self.web_view = webkit.WebView()
         self.web_view.open(self.default_site)
 

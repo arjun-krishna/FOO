@@ -17,3 +17,17 @@
 	background-color: #eee;										/*same color as #ui */
 	display: inline-block;
 }
+
+#mode {
+	height: 40px;
+}
+
+.mode-option {
+	height: 40px;
+	background-color: #aaa;
+	display: inline-block;
+	border-style: solid;
+	border-width: 5px;
+	border-color: #eee;
+	width : 130px;
+}

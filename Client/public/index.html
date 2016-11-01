@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>FOO</title>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+	<body>
+		<div id="ui" ng-app="myApp" ng-controller="myCtrl" >
+			<div id="search-box">
+				<input id="user-mssg" ng-model="user_input" ng-keyup="event=$event;check_key();"></input>
+				<div id="speech" ng-click="notify('CPP','vector<int> V({1,2})')"><center><img width="30px" height="30px" src="img/mic.png" style=""/></center></div>
+			</div>
+			<div id="mode">
+				<div class="mode-option" ng-style="mode_style[0]" ng-click="mode(0)"><center><img src="img/mic.png" width="30px" height="30px"></center></div>
+				<div class="mode-option" ng-style="mode_style[1]" ng-click="mode(1)"><center><img src="img/mic.png" width="30px" height="30px"></center></div>
+				<div class="mode-option" ng-style="mode_style[2]" ng-click="mode(2)"><center><img src="img/mic.png" width="30px" height="30px"></center></div> 
+			</div>
+			<div id="results" >
+			<div id="chat" ng-show="tab_show[0]">
+			
+			</div>
+			<div id="programming" ng-show="tab_show[1]">
+
+			</div>
+			<div id="error" ng-show="tab_show[2]">
+
+			</div>
+			</div>
+			<script type="text/javascript" src="js/index.js"></script>
+		</div>
+	</body>
+</html>
