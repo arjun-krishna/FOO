@@ -1,0 +1,16 @@
+set reminder {day}
+open {}
+close {}
+music {}
+play {}
+calculate {}
+calculator { }
+search for {}
+what's new ?
+news
+show score
+execute {}
+
+
+// personalise 
+//  
