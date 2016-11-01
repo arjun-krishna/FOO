@@ -15,4 +15,5 @@ class TestView(APIView):
 		return Response(data, status=status.HTTP_200_OK)
 
 	def post(self, request, format=None):
-		return Response(status=status.HTTP_200_OK)
+		print self.request.data;
+		return Response(self.request.data, status=status.HTTP_200_OK)

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>FOO</title>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+	<body>
+		<div id="ui" ng-app="myApp" ng-controller="myCtrl" >
+			<div id="search-box">
+				<input id="user-mssg" ng-model="user_input"></input>
+				<div id="speech" ng-click="notify('CPP','vector<int> V({1,2})')"><center><img width="30px" height="30px" src="img/mic.png" style=""/></center></div>
+			</div>
+			<div id="results" >
+
+			</div>
+			<script type="text/javascript" src="js/index.js"></script>
+		</div>
+	</body>
+</html>

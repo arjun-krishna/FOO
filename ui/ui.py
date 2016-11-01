@@ -6,7 +6,7 @@ import gobject
 
 class MyWindowWebKit:
 
-    default_site = "http://localhost:8000/"
+    default_site = "http://localhost:3000/"
 
     def delete_event(self, widget, event, data=None):
         return False
