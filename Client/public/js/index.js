@@ -45,4 +45,23 @@ app.controller('myCtrl', function($scope,$http) {
 	  	}
 	  }
   };
+
+  $scope.testnlp = function (){
+  	if($scope.search_string.length != 0){
+  		$http({
+  			'method'	: 'POST',
+  			'url'			: 'http://127.0.0.1:8000/nlp/scrape/',
+  			'data'		: {'string' : $scope.search_string }	
+  		})
+  		.then(function (resp){
+  			console.log(resp.data);
+  		}, function (err){
+  			console.log(err);
+  		});
+  	}
+  	else {
+  		alert("length 0");
+  	}
+  }
+
 });

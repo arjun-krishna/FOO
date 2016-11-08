@@ -1,3 +1,4 @@
 Server/*/*.pyc
 Server/db.sqlite3
 Client/node_modules/*
+Client/public/bootstrap-3.3.7-dist
