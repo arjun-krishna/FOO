@@ -56,7 +56,7 @@ app.controller('myCtrl', function($scope,$http) {
 			$http({
 				'method' 	: 'POST',
 				'url'		: url,
-				'data'		: text,
+				'data'		: {"string" :$scope.message_text},
 			})
 			.then(function (resp){
 				console.log(resp);

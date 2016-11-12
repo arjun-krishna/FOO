@@ -36,7 +36,10 @@ class NlpScrapeView(APIView):
 	def post(self, request, format=None):
 		string = self.request.data['string']
 		print string
-		search_string = functions.get_search_string(string)
-		final_obj = googlescrape(search_string)
+		# search_string = functions.get_search_string(string)
+		final_obj = googlescrape(string)
+		print final_obj
+
 		# Function call in nlp functions
+
 		return Response(final_obj, status = status.HTTP_200_OK)
