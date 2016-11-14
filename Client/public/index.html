@@ -64,7 +64,7 @@
 								<span class="direct-chat-img-reply-small"  ng-class="{'pull-left' : text.isbot , 'pull-right' : !text.isbot}" ></span> <span class="direct-chat-reply-name">{{text.receiver}}</span>
 							</div><!-- /.direct-chat-text --> 
 						</div><!-- /.direct-chat-msg -->
-					</div>
+					</div>	
 				</div>
 			</div>
 			<div class="popup-messages-footer">
@@ -163,7 +163,7 @@
 						<!-- <div class="chat-box-single-line">
 							<abbr class="timestamp">{{text.date}}</abbr>
 						</div> --><!-- Message. Default to the left -->
-						<div class="direct-chat-msg doted-border">
+						<div class="direct-chat-msg doted-border" ng-show="!text.isbot">
 							<div class="direct-chat-info clearfix">
 								<span class="direct-chat-name" ng-class="{'pull-left' : text.isbot , 'pull-right' : !text.isbot}">{{text.name}}</span>
 							</div><!-- /.direct-chat-info -->
@@ -178,6 +178,23 @@
 								<span class="direct-chat-img-reply-small"  ng-class="{'pull-left' : text.isbot , 'pull-right' : !text.isbot}" ></span> <span class="direct-chat-reply-name">{{text.receiver}}</span>
 							</div><!-- /.direct-chat-text --> 
 						</div><!-- /.direct-chat-msg -->
+						<div class="direct-chat-msg doted-border" ng-show="text.isbot">
+							<div ng-show="text.errormsg!=null">
+								{{text.errormsg}}
+							</div>
+							<div ng-hide="text.errormsg!=null">
+								<textarea>
+									Question : {{text.data.question}}
+								</textarea>	
+								<!-- Answer : -->
+								<!-- <div ng-repeat="answer in text.data.answers">
+								{{answer.text}}
+								</div> -->
+								<pre>
+									Accepted answer : {{text.data.accepted_ans.text}}
+								</pre>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

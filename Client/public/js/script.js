@@ -6,28 +6,6 @@ app.controller('myCtrl', function($scope,$http) {
 	for(i=0;i<3;i++){
 		textMap.push([]);
 	}
-	for(i=0;i<3;i++){
-		var texts = textMap[i];
-		var text = {
-			"date" : i,
-			"name" : "bot",
-			"isbot" : true,
-			"receiver" : "user",
-			"time" : "anytime",
-			"textdata"  :" hello rammante!!"
-		};
-		texts.push(text);
-		text = {
-			"date" : i,
-			"name" : "user",
-			"isbot" : false,
-			"receiver" : "bot",
-			"time" : "anytime",
-			"textdata"  :" bye bye!!"
-		};
-		texts.push(text);	
-	}
-
 
 	$scope.check_key = function() {
 		if( $scope.event.keyCode == 13) {
@@ -43,7 +21,9 @@ app.controller('myCtrl', function($scope,$http) {
 			};
 			$scope.textMap[$scope.current_tab-1].push(text);
 			// send text over to server
-			var url;
+			var lol = new String($scope.message_text);
+			$scope.message_text = "";
+			// var url;
 			if($scope.current_tab == 1){
 				url = 'http://127.0.0.1:8000/nlp/chatbot/'
 			}
@@ -56,18 +36,38 @@ app.controller('myCtrl', function($scope,$http) {
 			$http({
 				'method' 	: 'POST',
 				'url'		: url,
-				'data'		: {"string" :$scope.message_text},
+				'data'		: {"string" :lol},
 			})
 			.then(function (resp){
 				console.log(resp);
+				var currdate = "Today";
 				var bot_text = {
-
+					"date" : currdate,
+					"name" : "BOT",
+					"isbot" : true,
+					"receiver" : "User",
+					"time" : "just now",
 				};
-				// $scope.textMap[$scope.current_tab-1].push(bot_text);
+				if(resp.config.url === 'http://127.0.0.1:8000/nlp/chatbot/'){
+					bot_text.textdata = resp.data.string
+				}	
+				else if(resp.config.url === 'http://127.0.0.1:8000/nlp/scrape/'){
+					console.log("pop")
+					if(resp.data.error!=null){
+						bot_text.errormsg = resp.data.error;
+					}
+					else {
+						// bot_text.data = {}
+						bot_text.data = resp.data
+					}
+					// console.log(bot_text.data.accepted_ans.text)
+				}
+				$scope.textMap[$scope.current_tab-1].push(bot_text);
+				
 			}, function (err){
 				console.log(err);
 			});
-			$scope.message_text = "";
+			
 		}
 	}
 });

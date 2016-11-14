@@ -3,9 +3,15 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 import functions
-from scraper.googlescraper import *
+from scraper.googlescraper_mod import *
+from chat.chat import *
+from wit import Wit
+import subprocess
 # Create your views here.
-
+chat_context = {}
+client = Wit(access_token="UBTCYTFGDP3K3DJIGRV462NLNG2MM4I7", actions=actions)
+# client.interactive()
+client.logger.setLevel(logging.WARNING)
 
 # Sample view for GET , POST requests
 # if your url has /person/<id>/ , then, the id value will be injected into args
@@ -28,9 +34,19 @@ class NlpProgrammingView(APIView):
 
 class NlpChatView(APIView):
 	def post(self, request, format=None):
-		string = str(self.request.data)
-		print string
-		return Response(self.request.data, status = status.HTTP_200_OK)
+		string = str(self.request.data['string'])
+		print string, "gold"
+		f = open("file.txt","w")
+		f.write(string)
+		f.close()
+		proc = subprocess.Popen("python chat/chat.py", stdout=subprocess.PIPE, shell=True)
+		(out, err) = proc.communicate()
+		print "shit"
+		print out
+		resp = {"string":out}
+		# chat_context = chat_bot(client, 'my-user-session-42', string, chat_context)
+
+		return Response(resp, status = status.HTTP_200_OK)
 
 class NlpScrapeView(APIView):
 	def post(self, request, format=None):
@@ -38,7 +54,9 @@ class NlpScrapeView(APIView):
 		print string
 		# search_string = functions.get_search_string(string)
 		final_obj = googlescrape(string)
-		print final_obj
+		# print final_obj
+		if not final_obj :
+			final_obj = {"error" :"Sorry. Can't find any suggestions"}
 
 		# Function call in nlp functions
 
