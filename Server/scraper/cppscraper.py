@@ -8,8 +8,17 @@ from selenium import webdriver
 from soscraper import soscrape
 import time
 import re
-#browser = webdriver.PhantomJS()
-browser = webdriver.Firefox()
+import subprocess
+# browser = webdriver.PhantomJS()
+# browser = webdriver.Firefox()
+
+L = [" ","(",")","[","]","&","'","\""]
+
+def strprocess(fname):
+    for c in L :
+        fname = fname.replace(c,"\\"+c)
+    return fname
+
 
 def best_ans(answers):
     upvts = 0
@@ -25,7 +34,7 @@ def best_ans(answers):
 
     return best
 
-def googlescrape(search_string):
+def cppscrape(search_string):
 	# do the search
 	# in the top 10 results, choose best stackoverflow/askubuntu/whatever site's answer
 	# Now, scrape the required page for info
@@ -47,10 +56,10 @@ def googlescrape(search_string):
 	# 	has_exec_code : Boolean,
 	# 	exec_code : List(String)
 	# }
-
+    browser = webdriver.PhantomJS()
     browser.get('https://www.google.com')
     search_field = browser.find_element_by_name('q')
-    search_field.send_keys(search_string)
+    search_field.send_keys(search_string + " site:en.cppreference.com")
     search_field.send_keys(Keys.RETURN)
     time.sleep(1)
     body = browser.find_element_by_tag_name('body')
@@ -74,11 +83,22 @@ def googlescrape(search_string):
     #         URLs.append(uri)
     #print "No. of urls found : %d" %len(URIs)
     #print URIs
-    browser.get(URIs[0])
-    content = browser.find_elements_by_class_name('t-example-code ')
-    #example = content.find_element_by_class_name('t-example')
-    for c in content:
-       print c.text
+    wrote = False
+    file = open('cppdata.txt','w')
+    for url in URIs:
+        browser.get(url)
+        content = browser.find_elements_by_class_name('t-example-code ')
+        #example = content.find_element_by_class_name('t-example')
+        for c in content:
+            wrote = True
+            file.write(c.text)
+    file.close()
+    if wrote : 
+        updatedfile =strprocess('cppdata.txt') 
+        proc = subprocess.Popen("gnome-open "+updatedfile+" * 2> /tmp/foo.unwanted >/tmp/foo.unwanted", shell=True,
+            stdin=None, stdout=None, stderr=None, close_fds=True)
+        return True
+    else :
+        return False
 
-
-googlescrape("vectors in c++ inside:cppreference")
+# googlescrape("vectors in c++ inside:cppreference")

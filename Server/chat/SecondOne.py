@@ -3,8 +3,7 @@ import os
 import subprocess
 from wit import Wit
 import logging
-import pickle
-# from googlelinks import wiki_info
+from googlelinks import wiki_info
 
 # if len(sys.argv) != 2:
 #     print('usage: python ' + sys.argv[0] + ' <wit-token>')
@@ -42,7 +41,7 @@ def get_newexeclist(request):
         updatedfile =strprocess(fname)
         proc = subprocess.Popen("gnome-open "+updatedfile+" * 2> /tmp/foo.unwanted >/tmp/foo.unwanted", shell=True,
           stdin=None, stdout=None, stderr=None, close_fds=True)
-        context['retstmt'] = 'Sure!'
+        context['retstmt'] = 'Sure Sucess!'
 
     except:
         context['retstmt'] = 'Sorry, couldn\'t catch that? Could you repeat ! It might be the case that I lost my context! \n Please give an apt command' 
@@ -81,7 +80,7 @@ def get_fileexeclist(request):
         updatedfile =strprocess(fname)
         proc = subprocess.Popen("gnome-open "+updatedfile+" * 2> /tmp/foo.unwanted >/tmp/foo.unwanted", shell=True,
           stdin=None, stdout=None, stderr=None, close_fds=True)
-        context['fileretstmt'] = 'Sure!'
+        context['fileretstmt'] = 'Sure Sucess!'
 
     except:
         context['fileretstmt'] = 'Sorry, couldn\'t catch that? Could you repeat ! It might be the case that I lost my context! \n Please give an apt command' 
@@ -99,9 +98,9 @@ def get_describe(request):
     wikiname = first_entity_value(entities, 'wikiname')
     if wikiname:
         context['keyname']=wikiname
-        # result=wiki_info(wikiname)
-        context['retstr']=''
-        context['returl']='' # work in progress
+        result=wiki_info(wikiname)
+        context['retstr']=result['url']
+        context['returl']=result['data']
         #print result['url']
         #print result['data']
         #print "#######"
@@ -385,27 +384,19 @@ actions = {
     }
 
 client = Wit(access_token="UBTCYTFGDP3K3DJIGRV462NLNG2MM4I7", actions=actions)
-# # client.interactive()
-client.logger.setLevel(logging.WARNING)
-# #resp = client.message('play katy')
-# print('Yay, got Wit.ai response: ' + str(resp))
-# f = open('file.txt')
+client.interactive()
+#client.logger.setLevel(logging.WARNING)
+#resp = client.message('play katy')
+#print('Yay, got Wit.ai response: ' + str(resp))
 
-session_id = 'f0607fe6-aa6f-11e6-b121-3417eb627e2d'
-context = pickle.load(open('context.pkl', "r"))
-# print context, "in run action"
-file = open('file.txt', 'r')
-query = file.read()
-file.close()
-context = client.run_actions(session_id, query , context)
-# context = client.run_actions(session_id, 'yes', context)
-# print('The session state is now: ' + str(context))
-pickle.dump(context, open('context.pkl','w'))
-# print context , "final"
+# session_id = 'f0607fe6-aa6f-11e6-b121-3417eb627e2d'
+# context0 = {}
+# context1 = client.run_actions(session_id, 'play SAtya', context0)
+# context1 = client.run_actions(session_id, '2', context1)
+# print('The session state is now: ' + str(context1))
+
 
 #resp = client.converse('my-user-session-42', 'play katy', {})
 #print('Yay, got Wit.ai response: ' + str(resp))
 #resp = client.converse('my-user-session-42', 'play panjaa', {})
 #print('Yay, got Wit.ai response: ' + str(resp))
-# def chat_bot( client, context, session_id, query):
-	# context = client.run_actions(session_id, query, context)

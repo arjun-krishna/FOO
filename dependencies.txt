@@ -1,1 +1,13 @@
 # This file contains all the modules needed for the project
+PYTHON REQUIREMENTS :
+	Django 1.8
+	PhantomJS
+	Beautiful Soup
+	Django Rest Framework
+	Django CORS
+	Wit
+
+
+JAVASCRIPT REQUIREMENTS :
+	NodeJS
+	AngularJS
