@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^test/', nlp.views.TestView.as_view()), # for sample views in rest_framework
     url(r'^nlp/scrape/', nlp.views.NlpScrapeView.as_view()),
     url(r'^nlp/chatbot/', nlp.views.NlpChatView.as_view()),
+    url(r'^nlp/codingmate/', nlp.views.NlpCodingMateView.as_view()),
     url(r'',send_index), 
 ]

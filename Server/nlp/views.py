@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import functions
 from scraper.googlescraper_mod import *
+from scraper.cppscraper import *
 from chat.chat import *
 from wit import Wit
 import subprocess
@@ -26,11 +27,16 @@ class TestView(APIView):
 		return Response(self.request.data, status=status.HTTP_200_OK)
 
 
-class NlpProgrammingView(APIView):
+class NlpCodingMateView(APIView):
 	def post(self, request, format=None):
-		string = self.request.data
+		string = str(self.request.data['string'])
 		print string
-		return Response(self.request.data, status = status.HTTP_200_OK)
+		flag = cppscrape(string)
+		if flag is True:
+			data  = {'string': "Here is an example from cppreference site. :)"}
+		else :
+			data = {'string' : "Sorry, Couldn't find any example :("}
+		return Response(data, status = status.HTTP_200_OK)
 
 class NlpChatView(APIView):
 	def post(self, request, format=None):

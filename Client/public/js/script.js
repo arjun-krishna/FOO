@@ -7,10 +7,53 @@ app.controller('myCtrl', function($scope,$http) {
 		textMap.push([]);
 	}
 
+	setInterval(updateScroll1,500);
+	setInterval(updateScroll2,500);
+	setInterval(updateScroll3,500);
+
+	var scrolled1 = false;
+	var scrolled2 = false;
+	var scrolled3 = false;
+
+	function updateScroll1(){
+	    if(!scrolled1){
+	        var element = document.getElementById("scrollid1");
+	        element.scrollTop = element.scrollHeight;
+	    }
+	}
+
+	function updateScroll2(){
+	    if(!scrolled2){
+	        var element = document.getElementById("scrollid2");
+	        element.scrollTop = element.scrollHeight;
+	    }
+	}
+
+	function updateScroll3(){
+	    if(!scrolled3){
+	        var element = document.getElementById("scrollid3");
+	        element.scrollTop = element.scrollHeight;
+	    }
+	}
+
+	$("#scrollid1").on('scroll', function(){
+	    scrolled1=true;
+	});
+	$("#scrollid2").on('scroll', function(){
+	    scrolled2=true;
+	});
+	$("#scrollid3").on('scroll', function(){
+	    scrolled3=true;
+	});
+
+
 	$scope.check_key = function() {
 		if( $scope.event.keyCode == 13) {
 			console.log($scope.message_text);
 			console.log($scope.current_tab);
+			scrolled1 = false;
+			scrolled2 = false;
+			scrolled3 = false;
 			var text = {
 			"date" : i,
 			"name" : "user",
@@ -19,18 +62,19 @@ app.controller('myCtrl', function($scope,$http) {
 			"time" : "just now",
 			"textdata"  :$scope.message_text
 			};
-			$scope.textMap[$scope.current_tab-1].push(text);
+			var current_tab = $scope.current_tab;
+			$scope.textMap[current_tab-1].push(text);
 			// send text over to server
 			var lol = new String($scope.message_text);
 			$scope.message_text = "";
 			// var url;
-			if($scope.current_tab == 1){
+			if(current_tab== 1){
 				url = 'http://127.0.0.1:8000/nlp/chatbot/'
 			}
-			else if($scope.current_tab==2){
+			else if(current_tab==2){
 				url = 'http://127.0.0.1:8000/nlp/codingmate/'
 			}
-			else if($scope.current_tab==3){
+			else if(current_tab==3){
 				url = 'http://127.0.0.1:8000/nlp/scrape/'
 			}
 			$http({
@@ -62,7 +106,10 @@ app.controller('myCtrl', function($scope,$http) {
 					}
 					// console.log(bot_text.data.accepted_ans.text)
 				}
-				$scope.textMap[$scope.current_tab-1].push(bot_text);
+				else {
+					bot_text.textdata = resp.data.string
+				}
+				$scope.textMap[current_tab-1].push(bot_text);
 				
 			}, function (err){
 				console.log(err);
@@ -71,3 +118,4 @@ app.controller('myCtrl', function($scope,$http) {
 		}
 	}
 });
+

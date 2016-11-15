@@ -13,186 +13,119 @@
 	</script>
 	<script src="js/script.js" type="text/javascript">
 	</script>
+	<script src="js/ctrl.js" type="text/javascript">
+	</script>
 	<title></title>
 </head>
+
 <body ng-app="myApp">
+
 	<div ng-controller="myCtrl">
+
+
 		<div class="popup-box chat-popup popup-box-on" ng-show="current_tab==1">
-		Chat bot
-			<div class="popup-head">
+		
+			<div class="popup-head popup-head1">
 				<div class="popup-head-left pull-left">
-					<img alt="iamgurdeeposahan" src="img/chatbot.png"> Foo-AI
+					<img src="img/chatbot.png"> Chat bot
 				</div>
-				<div class="popup-head-right pull-right">
-					<div class="btn-group">
-						<button aria-expanded="false" class="chat-header-button" data-toggle="dropdown" type="button"><i class="glyphicon glyphicon-cog"></i></button>
-						<ul class="dropdown-menu pull-right" role="menu">
-							<li>
-								<a href="#">Media</a>
-							</li>
-							<li>
-								<a href="#">Block</a>
-							</li>
-							<li>
-								<a href="#">Clear Chat</a>
-							</li>
-							<li>
-								<a href="#">Email Chat</a>
-							</li>
-						</ul>
-					</div><button class="chat-header-button pull-right" data-widget="remove" id="removeClass" type="button"><i class="glyphicon glyphicon-off"></i></button>
-				</div>
+				<div ng-include="'views/popup-head.html'"></div>
 			</div>
-			<div class="popup-messages">
-				<div class="direct-chat-messages">
+			<div class="popup-messages" id = "scrollid1">
+				<div class="direct-chat-messages" >
 					<div ng-repeat="text in textMap[current_tab-1]">
-						<!-- <div class="chat-box-single-line">
-							<abbr class="timestamp">{{text.date}}</abbr>
-						</div> --><!-- Message. Default to the left -->
 						<div class="direct-chat-msg doted-border">
 							<div class="direct-chat-info clearfix">
 								<span class="direct-chat-name" ng-class="{'pull-left' : text.isbot , 'pull-right' : !text.isbot}">{{text.name}}</span>
-							</div><!-- /.direct-chat-info -->
-							<!-- <img alt="message user image" class="direct-chat-img" src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg" ng-class="{'pull-left' : text.isbot , 'pull-right' : !text.isbot}"> --><!-- /.direct-chat-img -->
-							<div class="direct-chat-text" layout-align="{'right' : text.isbot , 'right' : !text.isbot}">
+							</div>
+							<div class="direct-chat-text" ng-class="{'direct-chat-text-bot' : text.isbot}" layout-align="{'right' : text.isbot , 'right' : !text.isbot}">
 								{{text.textdata}}
 							</div>
-							<div class="direct-chat-info clearfix">
-								<span class="direct-chat-timestamp"  ng-class="{'pull-left' : !text.isbot , 'pull-right' : text.isbot}">{{text.time}}</span>
-							</div>
 							<!-- <div class="direct-chat-info clearfix">
-								<span class="direct-chat-img-reply-small"  ng-class="{'pull-left' : text.isbot , 'pull-right' : !text.isbot}" ></span> <span class="direct-chat-reply-name">{{text.receiver}}</span>
-							</div><!-- /.direct-chat-text --> 
-						</div><!-- /.direct-chat-msg -->
+								<span class="direct-chat-timestamp"  ng-class="{'pull-left' : !text.isbot , 'pull-right' : text.isbot}">{{text.time}}</span>
+							</div> -->
+						</div>
 					</div>	
+
 				</div>
 			</div>
 			<div class="popup-messages-footer">
 				<textarea cols="40" id="status_message1" name="message" placeholder="Type a message..." rows="10" ng-keyup="event=$event;check_key();" ng-model="message_text"></textarea>
 				<div class="btn-footer">
-					<button class="bg_none" ng-click="current_tab=1;"><i class="glyphicon glyphicon-film"></i></button> <button class="bg_none"  ng-click="current_tab=2;"><i class="glyphicon glyphicon-camera"></i></button> <button class="bg_none"  ng-click="current_tab=3;"><i class="glyphicon glyphicon-paperclip"></i></button> <button class="bg_none pull-right"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+					<button class="bg_none" ng-click="current_tab=1;"><i class="glyphicon glyphicon-sunglasses"></i></button> <button class="bg_none"  ng-click="current_tab=2;"><i class="glyphicon glyphicon-align-left"></i></button> <button class="bg_none"  ng-click="current_tab=3;"><i class="glyphicon glyphicon-cloud"></i></button> <!-- <button class="bg_none pull-right"><i class="glyphicon glyphicon-thumbs-up"></i></button> -->
 				</div>
 			</div>
 		</div>
 		<div class="popup-box chat-popup popup-box-on" ng-show="current_tab==2">
-			Coding assistant
-			<div class="popup-head">
+			
+			<div class="popup-head popup-head2">
 				<div class="popup-head-left pull-left">
-					<img alt="iamgurdeeposahan" src="img/chatbot.png"> Foo-AI
+					<img src="img/chatbot.png"> Coding assistant
 				</div>
-				<div class="popup-head-right pull-right">
-					<div class="btn-group">
-						<button aria-expanded="false" class="chat-header-button" data-toggle="dropdown" type="button"><i class="glyphicon glyphicon-cog"></i></button>
-						<ul class="dropdown-menu pull-right" role="menu">
-							<li>
-								<a href="#">Media</a>
-							</li>
-							<li>
-								<a href="#">Block</a>
-							</li>
-							<li>
-								<a href="#">Clear Chat</a>
-							</li>
-							<li>
-								<a href="#">Email Chat</a>
-							</li>
-						</ul>
-					</div><button class="chat-header-button pull-right" data-widget="remove" id="removeClass" type="button"><i class="glyphicon glyphicon-off"></i></button>
-				</div>
+				<div ng-include="'views/popup-head.html'"></div>
 			</div>
-			<div class="popup-messages">
+			<div class="popup-messages" id = "scrollid2">
 				<div class="direct-chat-messages">
 					<div ng-repeat="text in textMap[current_tab-1]">
-						<!-- <div class="chat-box-single-line">
-							<abbr class="timestamp">{{text.date}}</abbr>
-						</div> --><!-- Message. Default to the left -->
 						<div class="direct-chat-msg doted-border">
 							<div class="direct-chat-info clearfix">
 								<span class="direct-chat-name" ng-class="{'pull-left' : text.isbot , 'pull-right' : !text.isbot}">{{text.name}}</span>
-							</div><!-- /.direct-chat-info -->
-							<!-- <img alt="message user image" class="direct-chat-img" src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg" ng-class="{'pull-left' : text.isbot , 'pull-right' : !text.isbot}"> --><!-- /.direct-chat-img -->
-							<div class="direct-chat-text" layout-align="{'right' : text.isbot , 'right' : !text.isbot}">
+							</div>
+							<div class="direct-chat-text" ng-class="{'direct-chat-text-bot' : text.isbot}" layout-align="{'right' : text.isbot , 'right' : !text.isbot}">
 								{{text.textdata}}
 							</div>
-							<div class="direct-chat-info clearfix">
+							<!-- <div class="direct-chat-info clearfix">
 								<span class="direct-chat-timestamp"  ng-class="{'pull-left' : !text.isbot , 'pull-right' : text.isbot}">{{text.time}}</span>
 							</div>
-							<!-- <div class="direct-chat-info clearfix">
-								<span class="direct-chat-img-reply-small"  ng-class="{'pull-left' : text.isbot , 'pull-right' : !text.isbot}" ></span> <span class="direct-chat-reply-name">{{text.receiver}}</span>
-							</div><!-- /.direct-chat-text --> 
-						</div><!-- /.direct-chat-msg -->
+							 -->
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="popup-messages-footer">
 				<textarea cols="40" id="status_message2" name="message" placeholder="Type a message..." rows="10" ng-model="message_text"  ng-keyup="event=$event;check_key();"></textarea>
 				<div class="btn-footer">
-					<button class="bg_none" ng-click="current_tab=1;"><i class="glyphicon glyphicon-film"></i></button> <button class="bg_none"  ng-click="current_tab=2;"><i class="glyphicon glyphicon-camera"></i></button> <button class="bg_none"  ng-click="current_tab=3;"><i class="glyphicon glyphicon-paperclip"></i></button> <button class="bg_none pull-right"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+					<button class="bg_none" ng-click="current_tab=1;"><i class="glyphicon glyphicon-sunglasses"></i></button> <button class="bg_none"  ng-click="current_tab=2;"><i class="glyphicon glyphicon-align-left"></i></button> <button class="bg_none"  ng-click="current_tab=3;"><i class="glyphicon glyphicon-cloud"></i></button> <!-- <button class="bg_none pull-right"><i class="glyphicon glyphicon-thumbs-up"></i></button> -->
 				</div>
 			</div>
 		</div>
 		<div class="popup-box chat-popup popup-box-on" ng-show="current_tab==3">
-			Web scrape
-			<div class="popup-head">
+			
+			<div class="popup-head popup-head3">
 				<div class="popup-head-left pull-left">
-					<img alt="iamgurdeeposahan" src="img/chatbot.png"> Foo-AI
+					<img src="img/chatbot.png"> Web scrape
 				</div>
-				<div class="popup-head-right pull-right">
-					<div class="btn-group">
-						<button aria-expanded="false" class="chat-header-button" data-toggle="dropdown" type="button"><i class="glyphicon glyphicon-cog"></i></button>
-						<ul class="dropdown-menu pull-right" role="menu">
-							<li>
-								<a href="#">Media</a>
-							</li>
-							<li>
-								<a href="#">Block</a>
-							</li>
-							<li>
-								<a href="#">Clear Chat</a>
-							</li>
-							<li>
-								<a href="#">Email Chat</a>
-							</li>
-						</ul>
-					</div><button class="chat-header-button pull-right" data-widget="remove" id="removeClass" type="button"><i class="glyphicon glyphicon-off"></i></button>
-				</div>
+				<div ng-include="'views/popup-head.html'"></div>
 			</div>
-			<div class="popup-messages">
+			<div class="popup-messages" id = "scrollid3">
 				<div class="direct-chat-messages">
 					<div ng-repeat="text in textMap[current_tab-1]">
-						<!-- <div class="chat-box-single-line">
-							<abbr class="timestamp">{{text.date}}</abbr>
-						</div> --><!-- Message. Default to the left -->
+						
 						<div class="direct-chat-msg doted-border" ng-show="!text.isbot">
 							<div class="direct-chat-info clearfix">
 								<span class="direct-chat-name" ng-class="{'pull-left' : text.isbot , 'pull-right' : !text.isbot}">{{text.name}}</span>
-							</div><!-- /.direct-chat-info -->
-							<!-- <img alt="message user image" class="direct-chat-img" src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg" ng-class="{'pull-left' : text.isbot , 'pull-right' : !text.isbot}"> --><!-- /.direct-chat-img -->
-							<div class="direct-chat-text" layout-align="{'right' : text.isbot , 'right' : !text.isbot}">
+							</div>
+							<div class="direct-chat-text" ng-class="{'direct-chat-text-bot' : text.isbot}" layout-align="{'right' : text.isbot , 'right' : !text.isbot}">
 								{{text.textdata}}
 							</div>
-							<div class="direct-chat-info clearfix">
+							<!-- <div class="direct-chat-info clearfix">
 								<span class="direct-chat-timestamp"  ng-class="{'pull-left' : !text.isbot , 'pull-right' : text.isbot}">{{text.time}}</span>
 							</div>
-							<!-- <div class="direct-chat-info clearfix">
-								<span class="direct-chat-img-reply-small"  ng-class="{'pull-left' : text.isbot , 'pull-right' : !text.isbot}" ></span> <span class="direct-chat-reply-name">{{text.receiver}}</span>
-							</div><!-- /.direct-chat-text --> 
-						</div><!-- /.direct-chat-msg -->
+							 -->
+						</div>
 						<div class="direct-chat-msg doted-border" ng-show="text.isbot">
 							<div ng-show="text.errormsg!=null">
 								{{text.errormsg}}
 							</div>
 							<div ng-hide="text.errormsg!=null">
-								<textarea>
-									Question : {{text.data.question}}
-								</textarea>	
-								<!-- Answer : -->
-								<!-- <div ng-repeat="answer in text.data.answers">
-								{{answer.text}}
-								</div> -->
-								<pre>
-									Accepted answer : {{text.data.accepted_ans.text}}
-								</pre>
+								<div class="direct-chat-text " ng-class="{'direct-chat-text-bot' : text.isbot}" layout-align="{'right' : text.isbot , 'right' : !text.isbot}">
+									<b> Question : </b> <br>
+									{{text.data.question}}
+								</div>	
+								<div class="direct-chat-text" ng-class="{'direct-chat-text-bot' : text.isbot}" layout-align="{'right' : text.isbot , 'right' : !text.isbot}">
+									<b> Accepted answer : </b> <br>
+									{{text.data.accepted_ans.text}}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -201,7 +134,7 @@
 			<div class="popup-messages-footer">
 				<textarea cols="40" id="status_message3" name="message" placeholder="Type a message..." rows="10" ng-model="message_text"  ng-keyup="event=$event;check_key();"></textarea>
 				<div class="btn-footer">
-					<button class="bg_none" ng-click="current_tab=1;"><i class="glyphicon glyphicon-film"></i></button> <button class="bg_none"  ng-click="current_tab=2;"><i class="glyphicon glyphicon-camera"></i></button> <button class="bg_none"  ng-click="current_tab=3;"><i class="glyphicon glyphicon-paperclip"></i></button> <button class="bg_none pull-right"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+					<button class="bg_none" ng-click="current_tab=1;"><i class="glyphicon glyphicon-sunglasses"></i></button> <button class="bg_none"  ng-click="current_tab=2;"><i class="glyphicon glyphicon-align-left"></i></button> <button class="bg_none"  ng-click="current_tab=3;"><i class="glyphicon glyphicon-cloud"></i></button> <!-- <button class="bg_none pull-right"><i class="glyphicon glyphicon-thumbs-up"></i></button> -->
 				</div>
 			</div>
 		</div>
