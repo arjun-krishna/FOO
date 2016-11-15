@@ -49,8 +49,14 @@ def soscrape(URLs, browser, bs, time):
         for obj in objs[i:]:
             ans = get_answer(obj)
             if ans: answers.append(ans)
-        final_obj['answers'] = answers
-        final_list.append(final_obj)
-
+        # final_obj['answers'] = answers
+        if ans :
+            if accepted_ans == None:
+                final_obj['accepted_ans'] = ans[0] # better soln, upvotes max   
+                final_obj['answers'] = ans[1:]         
+            final_list.append(final_obj)
+        else :
+            final_obj['accepted_ans'] = None
+            final_obj['answers'] = []
     return final_list
     
